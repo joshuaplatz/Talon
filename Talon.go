@@ -252,15 +252,7 @@ func main() {
 			auth := setup(services[x], hosts[n], domain, username, password, opt.enum)
 			result, forfile, _ := auth.Login()
 			fmt.Println(result)
-			if strings.Contains(result, "User's Account Locked") && opt.enum != true {
-				reader := bufio.NewReader(os.Stdin)
-				fmt.Print("[*] Account lock out detected - Do you want to continue.[y/n]: ")
-				text, _ := reader.ReadString('\n')
-				if strings.Contains(text, "y") {
-					continue
-				}
-				log.Fatal("Shutting down")
-			}
+
 			if opt.outFile != "" {
 				forfile = forfile + "\n"
 				writefile(opt.outFile, forfile)
